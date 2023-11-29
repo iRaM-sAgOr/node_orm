@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 
 import sequelize from "./models/index.js";
 import User from "./models/user.js";
-import userRouter from "./routers/userRouters.js";
+import userRouter from "./routers/users/userRouters.js";
 
 dotenv.config();
 

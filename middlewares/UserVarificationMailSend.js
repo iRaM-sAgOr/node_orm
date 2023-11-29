@@ -1,7 +1,7 @@
 import { transporter } from "../utils/mail.js";
 import { createTokens } from "../utils/jwt.js";
 
-export const userVarificationMailSend = (req, res, next) => {
+export const userVarificationMailSend = async (req, res, next) => {
   const { email } = req.body;
   const verificationToken = createTokens(email);
   req.verificationToken = verificationToken;
@@ -10,10 +10,10 @@ export const userVarificationMailSend = (req, res, next) => {
     from: process.env.GMAIL_ID,
     to: email,
     subject: "Email Verification",
-    text: `Click this link to verify your email: ${process.env.GMAIL_VERIFYING_URL}/verify?token=${verificationToken}`,
+    text: `Click this link to verify your email: ${process.env.GMAIL_VERIFYING_URL}/user/verify?token=${verificationToken}`,
   };
 
-  transporter.sendMail(mailOptions, async (error, info) => {
+  await transporter.sendMail(mailOptions, async (error, info) => {
     if (error) {
       console.log("Error sending email:", error);
       // Handle email sending error
@@ -23,7 +23,7 @@ export const userVarificationMailSend = (req, res, next) => {
       });
     } else {
       console.log("Email sent: " + info.response);
+      next();
     }
   });
-  next();
 };
