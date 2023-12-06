@@ -1,9 +1,9 @@
 import { transporter } from "../utils/mail.js";
-import { createTokens } from "../utils/jwt.js";
+import { createEmailVerificationTokens } from "../utils/jwt.js";
 
 export const userVarificationMailSend = async (req, res, next) => {
   const { email } = req.body;
-  const verificationToken = createTokens(email);
+  const verificationToken = createEmailVerificationTokens(email);
   req.verificationToken = verificationToken;
   // Send verification email
   const mailOptions = {

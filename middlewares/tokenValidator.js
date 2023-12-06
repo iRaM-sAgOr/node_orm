@@ -6,7 +6,7 @@ export const emailTokenValidator = (req, res, next) => {
     return res.status(400).json({ error: "User Email not Authenticated!" });
 
   try {
-    const validToken = jwt.verify(token, process.env.TOKEN_SECRET);
+    const validToken = jwt.verify(token, process.env.TOKEN_SECRET_EMAIL_VERIFICATION);
     if (validToken) {
       req.authenticated = true;
       return next();
@@ -16,7 +16,7 @@ export const emailTokenValidator = (req, res, next) => {
   }
 };
 
-
+// Not yet used
 export const loginTokenValidator = (req, res, next) => {
     const accessToken = req.cookies["access-token"];
   
@@ -24,7 +24,7 @@ export const loginTokenValidator = (req, res, next) => {
       return res.status(400).json({ error: "User not Authenticated!" });
   
     try {
-      const validToken = jwt.verify(accessToken, process.env.TOKEN_SECRET);
+      const validToken = jwt.verify(accessToken, process.env.TOKEN_SECRET_EMAIL_VERIFICATION);
       if (validToken) {
         req.authenticated = true;
         return next();
