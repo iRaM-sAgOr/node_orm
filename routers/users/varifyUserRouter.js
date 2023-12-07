@@ -1,6 +1,6 @@
 import express from "express";
 import User from "../../models/user.js";
-import { emailTokenValidator } from "../../middlewares/tokenValidator.js";
+import { emailTokenValidator } from "../../middlewares/TokenValidator.js";
 
 const varifyUserRouter = express.Router();
 

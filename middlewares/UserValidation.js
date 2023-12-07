@@ -19,6 +19,8 @@ export const createUserDataValidation = (req, res, next) => {
   next();
 };
 
+// During login api hit, this middleware will check 
+// the necessary values are present or not in request
 export const loginUserValidator = (req, res, next) => {
   const { username, password } = req.body;
   if (!username || !password) {

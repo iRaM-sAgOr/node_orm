@@ -4,7 +4,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 
 import sequelize from "./models/index.js";
-import User from "./models/user.js";
+import { UserTokenAssociation } from "./models/user_token_association.js";
 import userRouter from "./routers/users/userRouters.js";
 
 dotenv.config();
@@ -23,6 +23,7 @@ app.listen(PORT, async () => {
   try {
     await sequelize.authenticate();
     console.log("Database connection has been established successfully.");
+    UserTokenAssociation();
     // Synchronize models with the database
     await sequelize.sync({ alter: false });
     console.log("Database synced.");
